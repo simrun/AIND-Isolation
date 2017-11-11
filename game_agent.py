@@ -247,7 +247,7 @@ class MinimaxPlayer(IsolationPlayer):
                 v = max(v, min_value(self, game.forecast_move(m), depth-1))
             return v
 
-        return max(game.get_legal_moves(self), key=lambda a: min_value(self, game, depth-1))
+        return max(game.get_legal_moves(), key=lambda m: min_value(self, game.forecast_move(m), depth-1))
 
 
 class AlphaBetaPlayer(IsolationPlayer):
@@ -380,4 +380,4 @@ class AlphaBetaPlayer(IsolationPlayer):
                 alpha = max(alpha, v)
             return v
 
-        return max(game.get_legal_moves(self), key=lambda a: min_value(self, game, depth - 1, alpha, beta))
+        return max(game.get_legal_moves(), key=lambda m: min_value(self, game.forecast_move(m), depth - 1, alpha, beta))
