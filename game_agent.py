@@ -214,6 +214,10 @@ class MinimaxPlayer(IsolationPlayer):
 
         assert(depth > 0)
 
+        # No legal moves
+        if not bool(game.get_legal_moves()):
+            return (-1, -1)
+
         def terminal_test(self, game):
             return not bool(game.get_legal_moves())
 
@@ -340,6 +344,10 @@ class AlphaBetaPlayer(IsolationPlayer):
             raise SearchTimeout()
 
         assert (depth > 0)
+
+        # No legal moves
+        if not bool(game.get_legal_moves()):
+            return (-1, -1)
 
         def terminal_test(self, game):
             return not bool(game.get_legal_moves())
