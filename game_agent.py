@@ -225,11 +225,8 @@ class MinimaxPlayer(IsolationPlayer):
             if self.time_left() < self.TIMER_THRESHOLD:
                 raise SearchTimeout()
 
-            if terminal_test(self, game):
-                return game.utility(game.active_player)
-
-            if depth == 0:
-                return self.score(game)
+            if terminal_test(self, game) or depth == 0:
+                return self.score(game, game.active_player)
 
             v = float('Inf')
             for m in game.get_legal_moves():
@@ -240,11 +237,8 @@ class MinimaxPlayer(IsolationPlayer):
             if self.time_left() < self.TIMER_THRESHOLD:
                 raise SearchTimeout()
 
-            if terminal_test(self, game):
-                return game.utility(game.active_player)
-
-            if depth == 0:
-                return self.score(game)
+            if terminal_test(self, game) or depth == 0:
+                return self.score(game, game.active_player)
 
             v = float('-Inf')
             for m in game.get_legal_moves():
@@ -366,10 +360,7 @@ class AlphaBetaPlayer(IsolationPlayer):
             if self.time_left() < self.TIMER_THRESHOLD:
                 raise SearchTimeout()
 
-            if terminal_test(self, game):
-                return game.utility(game.active_player)
-
-            if depth == 0:
+            if terminal_test(self, game) or depth == 0:
                 return self.score(game, game.active_player)
 
             v = float('Inf')
@@ -384,10 +375,7 @@ class AlphaBetaPlayer(IsolationPlayer):
             if self.time_left() < self.TIMER_THRESHOLD:
                 raise SearchTimeout()
 
-            if terminal_test(self, game):
-                return game.utility(game.active_player)
-
-            if depth == 0:
+            if terminal_test(self, game) or depth == 0:
                 return self.score(game, game.active_player)
 
             v = float('-Inf')
