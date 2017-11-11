@@ -292,8 +292,18 @@ class AlphaBetaPlayer(IsolationPlayer):
         """
         self.time_left = time_left
 
-        # Fixed depth search
-        return self.alphabeta(game, self.search_depth)
+        best_move = (-1, -1)
+
+        d = 1
+        while True:
+            try:
+                best_move = self.alphabeta(game, d)
+            except SearchTimeout:
+                break
+
+            d += 1
+
+        return best_move
 
     def alphabeta(self, game, depth, alpha=float("-inf"), beta=float("inf")):
         """Implement depth-limited minimax search with alpha-beta pruning as
