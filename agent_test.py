@@ -21,9 +21,9 @@ class IsolationTest(unittest.TestCase):
         self.player1 = "Player1"
         self.player2 = "Player2"
         self.game = isolation.Board(self.player1, self.player2)
+        self.time_left = lambda: 1000
 
     def testMiniMaxCenter(self):
-        time_left = lambda: 1000
 
         player1 = game_agent.MinimaxPlayer(1, center_score)
         player2 = game_agent.MinimaxPlayer(1, center_score)
@@ -33,12 +33,10 @@ class IsolationTest(unittest.TestCase):
                              1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                              1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 31]
 
-        assert(player1 == game.active_player)
 
-        self.assertFalse(player1.get_move(game, time_left) == (2,2))
+        self.assertFalse(player1.get_move(game, self.time_left) == (2,2))
 
     def testMiniMaxImproved(self):
-        time_left = lambda: 1000
 
         player1 = game_agent.MinimaxPlayer(1, improved_score)
         player2 = game_agent.MinimaxPlayer(1, improved_score)
@@ -48,9 +46,8 @@ class IsolationTest(unittest.TestCase):
                              1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0,
                              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 24]
 
-        assert(player1 == game.active_player)
 
-        self.assertFalse(player1.get_move(game, time_left) == (7,0))
+        self.assertFalse(player1.get_move(game, self.time_left) == (7,0))
 
 if __name__ == '__main__':
     unittest.main()
