@@ -10,6 +10,8 @@ import game_agent
 
 from importlib import reload
 
+from sample_players import center_score
+
 
 class IsolationTest(unittest.TestCase):
     """Unit tests for isolation agents"""
@@ -20,6 +22,20 @@ class IsolationTest(unittest.TestCase):
         self.player2 = "Player2"
         self.game = isolation.Board(self.player1, self.player2)
 
+    def testMiniMax(self):
+        time_left = lambda: 1000
+
+        player1 = game_agent.MinimaxPlayer(1, center_score)
+        player2 = game_agent.MinimaxPlayer(1, center_score)
+
+        game = isolation.Board(player1, player2, 9, 9)
+        game._board_state = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1,
+                             1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+                             1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 31]
+
+        assert(player1 == game.active_player)
+
+        self.assertFalse(player1.get_move(game, time_left) == (2,2))
 
 if __name__ == '__main__':
     unittest.main()
