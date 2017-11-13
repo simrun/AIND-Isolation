@@ -226,7 +226,7 @@ class MinimaxPlayer(IsolationPlayer):
                 raise SearchTimeout()
 
             if terminal_test(game) or depth == 0:
-                return self.score(game, game.active_player)
+                return self.score(game, game.inactive_player)
 
             v = float('Inf')
             for m in game.get_legal_moves():
@@ -361,7 +361,7 @@ class AlphaBetaPlayer(IsolationPlayer):
                 raise SearchTimeout()
 
             if terminal_test(game) or depth == 0:
-                return self.score(game, game.active_player)
+                return self.score(game, game.inactive_player)
 
             v = float('Inf')
             for m in game.get_legal_moves():
