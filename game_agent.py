@@ -420,7 +420,7 @@ class AlphaBetaPlayer(IsolationPlayer):
         else:
             best_move = legal_moves[0]
 
-        best_value = float('-inf')
+        best_value = alpha
         for m in game.get_legal_moves():
             v = min_value(game.forecast_move(m), depth - 1, best_value, beta)
             if v > best_value:
