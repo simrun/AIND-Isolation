@@ -36,8 +36,17 @@ def custom_score(game, player):
         The heuristic value of the current game state to the specified player.
     """
 
-    return null_score(game, player)
+    if game.is_loser(player):
+        return float("-inf")
 
+    if game.is_winner(player):
+        return float("inf")
+
+    (x,y) = game.get_player_location(game.active_player)
+    (p,q) = game.get_player_location(game.inactive_player)
+
+    # Square distance between players
+    return float((x-p)**2 + (y-q)**2)
 
 def custom_score_2(game, player):
     """Calculate the heuristic value of a game state from the point of view
@@ -62,8 +71,20 @@ def custom_score_2(game, player):
         The heuristic value of the current game state to the specified player.
     """
 
-    return null_score(game, player)
+    if game.is_loser(player):
+        return float("-inf")
 
+    if game.is_winner(player):
+        return float("inf")
+
+    (x, y) = game.get_player_location(game.active_player)
+    (p, q) = game.get_player_location(game.inactive_player)
+
+    # Am I on the same row or column as my opponent?
+    if x == p or y == q:
+        return 10000.
+    else:
+        return 0.
 
 def custom_score_3(game, player):
     """Calculate the heuristic value of a game state from the point of view
@@ -88,7 +109,17 @@ def custom_score_3(game, player):
         The heuristic value of the current game state to the specified player.
     """
 
-    return null_score(game, player)
+    if game.is_loser(player):
+        return float("-inf")
+
+    if game.is_winner(player):
+        return float("inf")
+
+    # Am I blocking one of my opponent's moves?
+    if game.get_player_location(game.active_player) in game.get_legal_moves(game.inactive_player):
+        return 10000.
+    else:
+        return 0.
 
 
 class IsolationPlayer:
