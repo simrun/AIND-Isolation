@@ -4,6 +4,7 @@ and include the results in your report.
 """
 import random
 
+from sample_players import null_score
 
 class SearchTimeout(Exception):
     """Subclass base exception for code clarity. """
@@ -34,8 +35,8 @@ def custom_score(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-    # TODO: finish this function!
-    raise NotImplementedError
+
+    return null_score(game, player)
 
 
 def custom_score_2(game, player):
@@ -60,8 +61,8 @@ def custom_score_2(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-    # TODO: finish this function!
-    raise NotImplementedError
+
+    return null_score(game, player)
 
 
 def custom_score_3(game, player):
@@ -86,8 +87,8 @@ def custom_score_3(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-    # TODO: finish this function!
-    raise NotImplementedError
+
+    return null_score(game, player)
 
 
 class IsolationPlayer:
@@ -349,10 +350,6 @@ class AlphaBetaPlayer(IsolationPlayer):
 
         assert (depth > 0)
 
-        # No legal moves
-        if not bool(game.get_legal_moves()):
-            return (-1, -1)
-
         def terminal_test(game):
             return not bool(game.get_legal_moves())
 
@@ -386,8 +383,13 @@ class AlphaBetaPlayer(IsolationPlayer):
                 alpha = max(alpha, v)
             return v
 
+        legal_moves = game.get_legal_moves()
+        if not legal_moves:
+            return (-1, -1)
+        else:
+            best_move = legal_moves[0]
+
         best_value = float('-inf')
-        best_move = (-1,-1)
         for m in game.get_legal_moves():
             v = min_value(game.forecast_move(m), depth - 1, best_value, beta)
             if v > best_value:
