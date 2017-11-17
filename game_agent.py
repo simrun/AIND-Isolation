@@ -4,8 +4,6 @@ and include the results in your report.
 """
 import random
 
-from sample_players import null_score
-
 class SearchTimeout(Exception):
     """Subclass base exception for code clarity. """
     pass
